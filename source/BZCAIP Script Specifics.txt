@@ -1,0 +1,101 @@
+AIP Script Generator.
+
+Parse through AIPs and create the following files from originals. 
+
+Inputted Race: *
+
+ORIGINAL FILES: 
+
+bzceasy_s0(Core).aip
+bzcnorm_s0(Core).aip
+bzchard_s0(Core).aip
+bzcextr_s0(Core).aip
+
+Create:
+
+bzceasy_*0.aip
+bzcnorm_*0.aip
+bzchard_*0.aip
+bzcextr_*0.aip
+
+
+For all of these AIPs, replace: "sb
+
+with: "*b
+
+and: "sv
+
+with "*v
+
+And then to make Moon(default) world, replace: REPLACE"
+
+with: "
+
+
+Next handle the World Letter, these are on the end of every ODF built by 
+the AIP. Have a seperate file list each world letter to create, with the 
+first AIP set being none.  
+
+Append the world letter to each AIP File name, per world, so you make.
+
+Inputted World Letter: &
+
+bzceasy_*0&.aip
+bzcnorm_*0&.aip
+bzchard_*0&.aip
+bzcextr_*0&.aip
+
+For These AIP files, since we already setup the RACE, we just need to add 
+the world letter to the end. The CORE AIPs are already setup for this process.
+
+Replace: REPLACE" 
+
+with: &"
+
+
+Next, generate the different Team variations. For each of the AIPs made, 
+Generate one for each number, 0 - 4. A Total of 5. Loop through for each
+#.
+
+bzceasy_*#&.aip
+bzcnorm_*#&.aip
+bzchard_*#&.aip
+bzcextr_*#&.aip
+
+For the following coorsponding number, replace the following:
+
+replace: "0
+
+with: "#
+
+Then, replace: ForceStagePoint = N 
+
+with: ForceStagePoint = (N + 3*#) 
+
+So that ForceStagePoint = 1 turns into ForceStagePoint = 4 in # 1, and 
+ForceStagePoint = 3 turns into ForceStagePoint = 15 in aip # 4.
+
+
+Next, create the THUG AIPs, these are quite simpler. Follow the same 
+2 steps for Race and World letter. But there's only one, so no need 
+to mess with #.s
+
+Original File:
+
+bzcthug_s(Core).aip
+
+Inputted Race letter: *
+
+bzcthug_*.aip
+
+repalce: "sb
+with: "*b
+
+and: "sv
+with: "*v
+
+World Letter: &
+
+Replace: REPLACE"
+
+with: &"
