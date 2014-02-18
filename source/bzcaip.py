@@ -1,11 +1,10 @@
 """
-	BZCAIP v0.1.0 Beta
+	BZCAIP v1.0.0 Release
 
 	Currently experimental AIP generator for BattleZone II Classic Mod.
 
-	This software is licensed under the GNU General Public License
-	version 3. Please refer to gpl.txt for more information.
-	Copyright (c) 2013 DarkDragonDX
+	This software is licensed under the Draconic Free License
+	version 1. Please refer to LICENSE.txt for more information.
 """
 
 import os
@@ -107,8 +106,8 @@ class Application:
 	def main(self):
 		""" Main program "entry point" of sorts. """
 
-		print("BZCAIP AIP Generator v0.1.0 Beta")
-		print("Copyright (c) 2013 DarkDragonDX")
+		print("BZCAIP AIP Generator v1.0.0 Release")
+		print("Copyright (c) 2013 Robert MacGregor")
 
 		if (len(sys.argv)  < 2): die("Usage: %s <RACE>" % sys.argv[0])
 		self.race = sys.argv[1]
