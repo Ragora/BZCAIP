@@ -1,9 +1,9 @@
 ====================================================
-BZCAIP AIP Generator v0.1.0 for BattleZone II Classic Mod.
+BZCAIP AIP Generator v1.0.0 for BattleZone II Classic Mod.
 
 This software is licensed under the GNU General Public License
 version 3. Please refer to gpl.txt for more information.
-Copyright (c) 2013 DarkDragonDX
+Copyright (c) 2014 Robert MacGregor
 ====================================================
 
 Table of Contents:

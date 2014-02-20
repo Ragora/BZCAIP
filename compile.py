@@ -4,7 +4,7 @@
 
 	This software is licensed under the GNU General Public License
 	version 3. Please refer to gpl.txt for more information.
-	Copyright (c) 2013 DarkDragonDX
+	Copyright (c) 2004 Robert MacGregor
 """
 
 import shutil
