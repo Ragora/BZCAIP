@@ -3,9 +3,8 @@
 
 	Currently experimental AIP generator for BattleZone II Classic Mod.
 
-	This software is licensed under the GNU General Public License
-	version 3. Please refer to gpl.txt for more information.
-	Copyright (c) 2014 Robert MacGregor
+	This software is licensed under the Draconic Free License
+	version 1. Please refer to LICENSE.txt for more information.
 """
 
 import os
