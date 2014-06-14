@@ -8,6 +8,7 @@
 """
 
 import os
+import re
 import sys
 import os.path
 from contextlib import contextmanager
@@ -103,6 +104,8 @@ def write(filepath, data):
 class Application:
 	""" Application class merely designed for organization. """
 
+	stagepoint_expression = re.compile("ForceStagePoint ?= ?[0-9]+", re.IGNORECASE)
+	
 	def main(self):
 		""" Main program "entry point" of sorts. """
 
@@ -137,7 +140,7 @@ class Application:
 	def generate_race(self):
 		""" Race generation step function call. """
 
-		print("Generating race data ------------------------------")
+		#print("Generating race data ------------------------------")
 		for template in self.difficulties:
 			basename, basedata = template
 
@@ -146,7 +149,7 @@ class Application:
 			filebase = filebase.replace("NUMBER", "0")
 			filename = filebase.replace("WORLD", "")
 			
-			print("Creating Race Definition: %s" % filename)
+			#print("Creating Race Definition: %s" % filename)
 			filedata = str(basedata).replace("\"sb", "\"%sb" % self.race)
 			filedata = filedata.replace("\"sv", "\"%sv" % self.race)
 			filedata = filedata.replace("REPLACE\"", "\"")
@@ -160,7 +163,7 @@ class Application:
 				filebase = filebase.replace("NUMBER", "0")
 				filename = filebase.replace("WORLD", world)
 
-				print("Creating Race World Info: %s " % filename)
+				#print("Creating Race World Info: %s " % filename)
 				filedata = str(basedata).replace("REPLACE\"", "%s\"" % world)
 				filedata = filedata.replace("\"sb", "\"%sb" % self.race)
 				filedata = filedata.replace("\"sv", "\"%sv" % self.race)
@@ -169,7 +172,7 @@ class Application:
 	def generate_play(self):
 		""" Play generation step function call. """
 
-		print("Generating team data ------------------------------")
+		#print("Generating team data ------------------------------")
 		for world in self.worlds:
 			world_filepath = world
 			if (world_filepath == ""): world_filepath = "Moon (default)"
@@ -179,10 +182,10 @@ class Application:
 
 				filebase = "%s/%s/%s" % (self.race, world_filepath, basename.replace("RACE", self.race))
 				filebase = filebase.replace("WORLD", world)
-
+				
 				for i in range(1, 5):
 					filepath = filebase.replace("NUMBER", str(i))
-					print("Creating play information: %s" % filepath)
+					#print("Creating play information: %s" % filepath)
 
 					filedata =  str(basedata).replace("\"0", "\"%i" % i)
 					filedata = filedata.replace("\"sb", "\"%sb" % self.race)
@@ -191,41 +194,60 @@ class Application:
 					# Write Stage Point Information
 					# TODO: Verify that it operates correctly.
 					lastindex = 0
-
-					result = ""
-					for line in filedata.split("\n"):
-						line = line.rstrip()
-						linedata = line.lower().replace(" ", "").split("=")
-						if (linedata[0] == "forcestagepoint"):
-							number = int(linedata[1]) + 3 * i
-							result += "%s%u\n" % ("ForceStagePoint = ", number)
-						else:
-							result += "%s\n" % line
-
+					
+					# Iterate over all of the stagepoint information
+					match_iter = self.stagepoint_expression.finditer(filedata)
+					file_array = bytearray(filedata)
+					for match in match_iter:
+						result_stagepoint = int(match.group(0).split("=")[1]) + 3 * i
+						
+						start_point = match.start()
+						end_point = match.end()
+						
+						# In Bytes
+						desired_length = end_point - start_point
+						result_string = "ForceStagePoint=%u" % result_stagepoint
+							
+						# Write the result to our filedata
+						current_location = start_point
+						current_index = 0
+						while (True):
+							if (filedata[current_location] == "\n"):
+								break
+								
+							if (current_index < len(result_string)):
+								file_array[current_location] = result_string[current_index]
+								current_index += 1
+							else:
+								file_array[current_location] = " "
+								
+							current_location += 1
+							
+						filedata = str(file_array)
 
 					# NOTE: Was probably supposed to be done in the previous step?
-					result = result.replace("REPLACE\"", "%s\"" % world)
+					filedata = filedata.replace("REPLACE\"", "%s\"" % world)
 					
-					write(filepath, result)
+					write(filepath, filedata)
 
 	def generate_thug(self):
 		""" Thug generation step function call. """
 
-                thug_data = read("data/templ_THUG.aip")
-                for world in self.worlds:
+		thug_data = read("data/templ_THUG.aip")
+		for world in self.worlds:
 			world_filepath = world
 			if (world_filepath == ""): world_filepath = "Moon (default)"
+			
+			file_data = str(thug_data)
 
-                        file_data = str(thug_data)
+			file_name = "%s/%s/bzcthug_%s%s.aip" % (self.race, world_filepath, self.race, world)
+			#print("Generating THUG: %s" % file_name)
 
-		        file_name = "%s/%s/bzcthug_%s%s.aip" % (self.race, world_filepath, self.race, world)
-		        print("Generating THUG: %s" % file_name)
-
-		        file_data = file_data.replace("\"sb", "\"%sb" % self.race)
-		        file_data = file_data.replace("\"sv", "\"%sv" % self.race)
+			file_data = file_data.replace("\"sb", "\"%sb" % self.race)
+			file_data = file_data.replace("\"sv", "\"%sv" % self.race)
 			file_data = file_data.replace("REPLACE\"", "%s\"" % world)
 	
-		        write(file_name, file_data)
+			write(file_name, file_data)
 
 if __name__ == "__main__":
 	Application().main()
