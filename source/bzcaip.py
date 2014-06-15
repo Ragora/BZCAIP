@@ -10,8 +10,11 @@
 import os
 import re
 import sys
+import random
 import os.path
 from contextlib import contextmanager
+
+from settings import Settings
 
 def processor(arg, dirname, names):
 	""" Processor function that is passed in for the visit argument in os.path.walk in
@@ -100,11 +103,41 @@ def write(filepath, data):
 		data - The data to write.
 	"""
 	with safeopen(filepath, "w") as handle: handle.write(data)
+	
+def writeline(destination, data, location):
+	""" Writes a given string to the destination bytearray, overwriting
+	the line it happens to be on entirely. """
+	
+	current_location = location
+	current_index = 0
+	
+	destination_array = bytearray(destination)
+	while (True):
+		if (current_location == len(destination) or destination[current_location] == "\n"):
+			break
+								
+		if (current_index < len(data)):
+			destination_array[current_location] = data[current_index]
+			current_index += 1
+		else:
+			destination_array[current_location] = " "
+								
+		current_location += 1
+	
+	return str(destination_array)
+							
+def warning(output):
+	sys.stderr.write("WARNING: ")
+	sys.stderr.write(output)
+	sys.stderr.write("\n")
 
 class Application:
 	""" Application class merely designed for organization. """
 
 	stagepoint_expression = re.compile("ForceStagePoint ?= ?[0-9]+", re.IGNORECASE)
+	
+	# Sane Defaults for BZ2 Object counts	
+	object_types = [("Supp", 3), ("Hang", 3), ("Cafe", 3), ("Comm", 3), ("HQCP", 3), ("MBld", 3), ("Silo", 6), ("Barr", 6)]
 	
 	def main(self):
 		""" Main program "entry point" of sorts. """
@@ -115,6 +148,19 @@ class Application:
 		if (len(sys.argv)  < 2): die("Usage: %s <RACE>" % sys.argv[0])
 		self.race = sys.argv[1]
 		if (len(self.race) != 1): die("ERROR: Race names must be one letter in length.")
+		
+		# Load config
+		print("Loading config.cfg ...")
+		config = Settings("config.cfg")
+		
+		if (not config.is_good()):
+			warning("Failed to load config.cfg, assuming BZ2 defaults.")
+		else:
+			self.object_types = [ ]
+			object_type_conf = config.get_index("ObjectTypes", str).split(";")
+			for object_type_name in object_type_conf:
+				object_type_count_var = object_type_name + "Count"
+				self.object_types.append((object_type_name, config.get_index(object_type_count_var, int)))
 
 		self.difficulties = difficulties()
 		self.worlds = worlds()
@@ -140,7 +186,7 @@ class Application:
 	def generate_race(self):
 		""" Race generation step function call. """
 
-		#print("Generating race data ------------------------------")
+		print("Generating race data ------------------------------")
 		for template in self.difficulties:
 			basename, basedata = template
 
@@ -149,7 +195,7 @@ class Application:
 			filebase = filebase.replace("NUMBER", "0")
 			filename = filebase.replace("WORLD", "")
 			
-			#print("Creating Race Definition: %s" % filename)
+			print("Creating Race Definition: %s" % filename)
 			filedata = str(basedata).replace("\"sb", "\"%sb" % self.race)
 			filedata = filedata.replace("\"sv", "\"%sv" % self.race)
 			filedata = filedata.replace("REPLACE\"", "\"")
@@ -163,11 +209,12 @@ class Application:
 				filebase = filebase.replace("NUMBER", "0")
 				filename = filebase.replace("WORLD", world)
 
-				#print("Creating Race World Info: %s " % filename)
+				print("Creating Race World Info: %s " % filename)
 				filedata = str(basedata).replace("REPLACE\"", "%s\"" % world)
 				filedata = filedata.replace("\"sb", "\"%sb" % self.race)
 				filedata = filedata.replace("\"sv", "\"%sv" % self.race)
-				write(filename, filedata)
+				filedata = self.generate_objectdata(filename, filedata)
+				write(basename, filedata)
 
 	def generate_play(self):
 		""" Play generation step function call. """
@@ -185,7 +232,7 @@ class Application:
 				
 				for i in range(1, 5):
 					filepath = filebase.replace("NUMBER", str(i))
-					#print("Creating play information: %s" % filepath)
+					print("Creating play information: %s" % filepath)
 
 					filedata =  str(basedata).replace("\"0", "\"%i" % i)
 					filedata = filedata.replace("\"sb", "\"%sb" % self.race)
@@ -197,7 +244,6 @@ class Application:
 					
 					# Iterate over all of the stagepoint information
 					match_iter = self.stagepoint_expression.finditer(filedata)
-					file_array = bytearray(filedata)
 					for match in match_iter:
 						result_stagepoint = int(match.group(0).split("=")[1]) + 3 * i
 						
@@ -209,26 +255,13 @@ class Application:
 						result_string = "ForceStagePoint=%u" % result_stagepoint
 							
 						# Write the result to our filedata
-						current_location = start_point
-						current_index = 0
-						while (True):
-							if (filedata[current_location] == "\n"):
-								break
-								
-							if (current_index < len(result_string)):
-								file_array[current_location] = result_string[current_index]
-								current_index += 1
-							else:
-								file_array[current_location] = " "
-								
-							current_location += 1
-							
-						filedata = str(file_array)
+						filedata = writeline(filedata, result_string, start_point)
 
 					# NOTE: Was probably supposed to be done in the previous step?
 					filedata = filedata.replace("REPLACE\"", "%s\"" % world)
 					
-					write(filepath, filedata)
+					filedata = self.generate_objectdata(filepath, filedata)
+					write(basename, filedata)
 
 	def generate_thug(self):
 		""" Thug generation step function call. """
@@ -241,13 +274,45 @@ class Application:
 			file_data = str(thug_data)
 
 			file_name = "%s/%s/bzcthug_%s%s.aip" % (self.race, world_filepath, self.race, world)
-			#print("Generating THUG: %s" % file_name)
+			print("Generating THUG: %s" % file_name)
 
 			file_data = file_data.replace("\"sb", "\"%sb" % self.race)
 			file_data = file_data.replace("\"sv", "\"%sv" % self.race)
 			file_data = file_data.replace("REPLACE\"", "%s\"" % world)
-	
-			write(file_name, file_data)
+			
+			file_data = self.generate_objectdata(file_name, file_data)
+			write("data/templ_THUG.aip", file_data)
+			
+	def generate_objectdata(self, templatename, filedata):
+		""" Writes out the BZ2 object data to filedata. """
+		
+		for object_definition in self.object_types:
+			object_name, object_count = object_definition
+			object_possibilities = range(1, object_count + 1)
+			
+			# TODO: Move this to program init so that it's a little bit
+			# more efficient
+			object_expr = re.compile("[0-9]+%s[0-9]+" % object_name, re.IGNORECASE)
+			digit_expr = re.compile(object_name)
+			
+			match_iter = object_expr.finditer(filedata)
+			for match in match_iter:
+				if (len(object_possibilities) == 0):
+					warning("Too many occurances of %s in template %s to randomize ID's for! It is likely that your config.cfg is wrong." % (object_name, templatename))
+					break
+					
+				match_text = match.group(0)
+				match_split = re.split(digit_expr, match_text)
+				team_id = match_split[0]
+				
+				random_num = object_possibilities.pop(random.randint(0, len(object_possibilities) - 1))				
+
+				result_string = "%s%s%u" % (team_id, object_name, random_num)
+							
+				# Write the result to our filedata
+				filedata = writeline(filedata, result_string, match.start())
+				
+		return filedata
 
 if __name__ == "__main__":
 	Application().main()
