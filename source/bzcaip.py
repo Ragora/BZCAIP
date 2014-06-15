@@ -213,8 +213,8 @@ class Application:
 				filedata = str(basedata).replace("REPLACE\"", "%s\"" % world)
 				filedata = filedata.replace("\"sb", "\"%sb" % self.race)
 				filedata = filedata.replace("\"sv", "\"%sv" % self.race)
-				filedata = self.generate_objectdata(filename, filedata)
-				write(basename, filedata)
+				filedata = self.generate_objectdata(basename, filedata)
+				write(filename, filedata)
 
 	def generate_play(self):
 		""" Play generation step function call. """
@@ -260,8 +260,8 @@ class Application:
 					# NOTE: Was probably supposed to be done in the previous step?
 					filedata = filedata.replace("REPLACE\"", "%s\"" % world)
 					
-					filedata = self.generate_objectdata(filepath, filedata)
-					write(basename, filedata)
+					filedata = self.generate_objectdata(basename, filedata)
+					write(filepath, filedata)
 
 	def generate_thug(self):
 		""" Thug generation step function call. """
