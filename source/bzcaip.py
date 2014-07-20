@@ -135,6 +135,8 @@ class Application:
 	""" Application class merely designed for organization. """
 
 	stagepoint_expression = re.compile("ForceStagePoint ?= ?[0-9]+", re.IGNORECASE)
+	condition_expression = re.compile("planConditionPath[0-9]* *= *\"([A-z]|[0-9])+\"", re.IGNORECASE)
+	buildloc_expression = re.compile("buildLoc[0-9]", re.IGNORECASE)
 	
 	# Sane Defaults for BZ2 Object counts	
 	object_types = [("Supp", 3), ("Hang", 3), ("Cafe", 3), ("Comm", 3), ("HQCP", 3), ("MBld", 3), ("Silo", 6), ("Barr", 6)]
@@ -292,25 +294,43 @@ class Application:
 			
 			# TODO: Move this to program init so that it's a little bit
 			# more efficient
-			object_expr = re.compile("[0-9]+%s[0-9]+" % object_name, re.IGNORECASE)
-			digit_expr = re.compile(object_name)
+			condition_expr = re.compile("planConditionPath[0-9]* *= *\"[0-9]*%s[0-9]*\"" % object_name, re.IGNORECASE)
 			
-			match_iter = object_expr.finditer(filedata)
-			for match in match_iter:
+			condition_match_iter = condition_expr.finditer(filedata)
+			for condition_match in condition_match_iter:
 				if (len(object_possibilities) == 0):
 					warning("Too many occurances of %s in template %s to randomize ID's for! It is likely that your config.cfg is wrong." % (object_name, templatename))
 					break
 					
-				match_text = match.group(0)
-				match_split = re.split(digit_expr, match_text)
-				team_id = match_split[0]
+				condition_match_text = condition_match.group(0)
 				
-				random_num = object_possibilities.pop(random.randint(0, len(object_possibilities) - 1))				
+				# Now locate the data we want to change
+				condition_value_split = condition_match_text.split("=")
+				condition_value = condition_value_split[1].strip("\" ")
+				condition_value_split = condition_value.split(object_name)
+				
+				team_id = condition_value_split[0]
+				
+				# What was that condition #?
+				condition_number = condition_value_split[0].strip("planconditionpathPLANCONDITIONPATH ")
+				# Pick a number
+				random_num = object_possibilities.pop(random.randint(0, len(object_possibilities) - 1))
+				
+				# Construct the new value, we'll need it later
+				result_value = "%s%s%u" % (team_id, object_name, random_num)
+				result_string = "planConditionPath%s=\"%s\"" % (condition_number, result_value)
 
-				result_string = "%s%s%u" % (team_id, object_name, random_num)
-							
-				# Write the result to our filedata
-				filedata = writeline(filedata, result_string, match.start())
+				# Write the new planConditionPath to our filedata
+				filedata = writeline(filedata, result_string, condition_match.start())
+				
+				# Now grab the next buildLoc#
+				buildloc_location = filedata.find("buildLoc1", condition_match.start())
+				if (buildloc_location != -1):
+					result_string = "buildLoc1 = \"%s\"" % result_value
+					filedata = writeline(filedata, result_string, buildloc_location)
+				else:
+					print("BAD")
+			
 				
 		return filedata
 

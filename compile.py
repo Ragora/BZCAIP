@@ -12,3 +12,4 @@ import source
 
 if __name__ == "__main__":
 	shutil.copyfile("source/bzcaip.pyc", "dist/bzcaip.pyc")
+	shutil.copyfile("source/settings.pyc", "dist/settings.pyc")
