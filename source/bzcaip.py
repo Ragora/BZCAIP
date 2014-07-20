@@ -305,14 +305,14 @@ class Application:
 				condition_match_text = condition_match.group(0)
 				
 				# Now locate the data we want to change
-				condition_value_split = condition_match_text.split("=")
-				condition_value = condition_value_split[1].strip("\" ")
+				condition_match_split = condition_match_text.split("=")
+				condition_value = condition_match_split[1].strip("\" ")
 				condition_value_split = condition_value.split(object_name)
 				
 				team_id = condition_value_split[0]
 				
 				# What was that condition #?
-				condition_number = condition_value_split[0].strip("planconditionpathPLANCONDITIONPATH ")
+				condition_number = condition_match_split[0].strip("planconditionpathPLANCONDITIONPATH ")
 				# Pick a number
 				random_num = object_possibilities.pop(random.randint(0, len(object_possibilities) - 1))
 				
