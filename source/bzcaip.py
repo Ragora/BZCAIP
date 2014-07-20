@@ -82,9 +82,13 @@ def worlds():
 	print ("Loading world types ...")
 	with safeopen("data/worlds.txt", "r") as handle:
 		worlds = handle.read().split("\n")
+		
+	result = [ ]
+	for world in worlds:
+		result.append(world.split(":"))
 
 	if (len(worlds) == 0): die("FATAL: No world types to use!")
-	return worlds
+	return result
 	
 def read(filepath):
 	""" Simple read function that returns the entire contents of a given file.
@@ -138,6 +142,8 @@ class Application:
 	condition_expression = re.compile("planConditionPath[0-9]* *= *\"([A-z]|[0-9])+\"", re.IGNORECASE)
 	buildloc_expression = re.compile("buildLoc[0-9]", re.IGNORECASE)
 	
+	write_destination = None
+	
 	# Sane Defaults for BZ2 Object counts	
 	object_types = [("Supp", 3), ("Hang", 3), ("Cafe", 3), ("Comm", 3), ("HQCP", 3), ("MBld", 3), ("Silo", 6), ("Barr", 6)]
 	
@@ -147,9 +153,15 @@ class Application:
 		print("BZCAIP AIP Generator v1.0.0 Release")
 		print("Copyright (c) 2013 Robert MacGregor")
 
-		if (len(sys.argv)  < 2): die("Usage: %s <RACE>" % sys.argv[0])
+		if (len(sys.argv) < 2): die("Usage: %s <RACE> [DESTINATION FOLDER]" % sys.argv[0])
 		self.race = sys.argv[1]
 		if (len(self.race) != 1): die("ERROR: Race names must be one letter in length.")
+		
+		# Read the destination folder
+		if (len(sys.argv) == 3):
+			self.write_destination = sys.argv[2]
+		else:
+			self.write_destination = self.race
 		
 		# Load config
 		print("Loading config.cfg ...")
@@ -168,22 +180,22 @@ class Application:
 		self.worlds = worlds()
 
 		# Create the main output dir
-		try: os.makedirs(self.race)
+		destination_dir = os.path.join(self.write_destination)
+		try: os.makedirs(self.write_destination)
 		except OSError: pass
 		# Create the subdirs
-		os.chdir(self.race)
+		#os.chdir(destination_dir)
 		for world in self.worlds:
-			if (world == ""): world = "Moon (default)"
-			try: os.makedirs(world)
+			print(repr(world[0]))
+			if (world[0] == ""): world = [None, "Moon (default)"] # Hack
+			try: os.makedirs(os.path.join(self.write_destination, world[1]))
 			except OSError: pass
-		# Yea, I know, hacky hack to avoid having to change the logic everywhere else for this
-		os.chdir("../")
 
 		self.generate_race()
 		self.generate_play()
 		self.generate_thug()
 
-		print("COMPLETE: The result has been written to %s" % self.race)
+		print("COMPLETE: The result has been written to %s" % self.write_destination)
 
 	def generate_race(self):
 		""" Race generation step function call. """
@@ -192,7 +204,7 @@ class Application:
 		for template in self.difficulties:
 			basename, basedata = template
 
-			pathbase = "%s/Moon (default)/" % self.race
+			pathbase = os.path.join(self.write_destination, "Moon (default)/")
 			filebase = os.path.join(pathbase, basename.replace("RACE", self.race))
 			filebase = filebase.replace("NUMBER", "0")
 			filename = filebase.replace("WORLD", "")
@@ -205,11 +217,12 @@ class Application:
 
 			for world in self.worlds:
 				# Don't overwrite definitions
-				if (world == ""): continue
+				if (world[0] == ""): continue
 
-				filebase = "%s/%s/%s" % (self.race, world, basename.replace("RACE", self.race))
+				filebase = "%s/%s" % (world[1], basename.replace("RACE", self.race))
+				filebase = os.path.join(self.write_destination, filebase)
 				filebase = filebase.replace("NUMBER", "0")
-				filename = filebase.replace("WORLD", world)
+				filename = filebase.replace("WORLD", world[0])
 
 				print("Creating Race World Info: %s " % filename)
 				filedata = str(basedata).replace("REPLACE\"", "%s\"" % world)
@@ -223,14 +236,15 @@ class Application:
 
 		#print("Generating team data ------------------------------")
 		for world in self.worlds:
-			world_filepath = world
+			world_filepath = world[1]
 			if (world_filepath == ""): world_filepath = "Moon (default)"
 
 			for template in self.difficulties:
 				basename, basedata = template
 
-				filebase = "%s/%s/%s" % (self.race, world_filepath, basename.replace("RACE", self.race))
-				filebase = filebase.replace("WORLD", world)
+				filebase = "%s/%s" % (world_filepath, basename.replace("RACE", self.race))
+				filebase = filebase.replace("WORLD", world[0])
+				filebase = os.path.join(self.write_destination, filebase)
 				
 				for i in range(1, 5):
 					filepath = filebase.replace("NUMBER", str(i))
@@ -260,7 +274,7 @@ class Application:
 						filedata = writeline(filedata, result_string, start_point)
 
 					# NOTE: Was probably supposed to be done in the previous step?
-					filedata = filedata.replace("REPLACE\"", "%s\"" % world)
+					filedata = filedata.replace("REPLACE\"", "%s\"" % world[0])
 					
 					filedata = self.generate_objectdata(basename, filedata)
 					write(filepath, filedata)
@@ -270,20 +284,21 @@ class Application:
 
 		thug_data = read("data/templ_THUG.aip")
 		for world in self.worlds:
-			world_filepath = world
+			world_filepath = world[1]
 			if (world_filepath == ""): world_filepath = "Moon (default)"
 			
 			file_data = str(thug_data)
 
-			file_name = "%s/%s/bzcthug_%s%s.aip" % (self.race, world_filepath, self.race, world)
+			file_name = "%s/bzcthug_%s%s.aip" % (world_filepath, self.race, world[0])
+			file_name = os.path.join(self.write_destination, file_name)
 			print("Generating THUG: %s" % file_name)
 
 			file_data = file_data.replace("\"sb", "\"%sb" % self.race)
 			file_data = file_data.replace("\"sv", "\"%sv" % self.race)
-			file_data = file_data.replace("REPLACE\"", "%s\"" % world)
+			file_data = file_data.replace("REPLACE\"", "%s\"" % world[0])
 			
 			file_data = self.generate_objectdata(file_name, file_data)
-			write("data/templ_THUG.aip", file_data)
+			write(file_name, file_data)
 			
 	def generate_objectdata(self, templatename, filedata):
 		""" Writes out the BZ2 object data to filedata. """

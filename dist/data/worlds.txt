@@ -1,8 +1,9 @@
-A
-E
-I
-M
-T
-V
-G
-L
+A:Achilles
+E:Europa
+I:Io
+M:Mars
+T:Titan
+V:Venus
+G:Gynamede
+L:Elysium
+:
