@@ -16,6 +16,7 @@ sendAllUnitsOnStartup = true
 //DLLCanSwitch = false // For Debugging...
 
 Difficulty = 2 // 1=Easy, 2=Medium, 3=Hard, 4=Extreme
+DayWreckerChance = 0.05 // 5% chance for Daywreckers.
 
 // This is an Easy AIP, lets not let the AI scrap cheat...
 [Cheat]
