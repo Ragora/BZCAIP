@@ -40,12 +40,12 @@ def die(message):
 	print(message)
 	sys.exit(0)
 
-def difficulties():
+def difficulties(prefix="data"):
 	""" Helper function that returns a list of template files. """
 
 	print("Loading difficulties ...")
 	difficulties = [ ]
-	os.path.walk("data/templ_difficulties/", processor, difficulties)
+	os.path.walk(os.path.join(prefix, "templ_difficulties/"), processor, difficulties)
 	if (len(difficulties) == 0): die("FATAL: No difficulties to use!")
 	return difficulties
 
@@ -76,11 +76,11 @@ def safeopen(filepath, modes):
 		yield handle
 		handle.close()
 
-def worlds():
+def worlds(prefix="data"):
 	""" Helper function that returns a list of worlds. """
 
 	print ("Loading world types ...")
-	with safeopen("data/worlds.txt", "r") as handle:
+	with safeopen(os.path.join(prefix, "worlds.txt"), "r") as handle:
 		worlds = handle.read().split("\n")
 		
 	result = [ ]
@@ -141,9 +141,7 @@ class Application:
 	stagepoint_expression = re.compile("ForceStagePoint ?= ?[0-9]+", re.IGNORECASE)
 	condition_expression = re.compile("planConditionPath[0-9]* *= *\"([A-z]|[0-9])+\"", re.IGNORECASE)
 	buildloc_expression = re.compile("buildLoc[0-9]", re.IGNORECASE)
-	
-	write_destination = None
-	
+
 	# Sane Defaults for BZ2 Object counts	
 	object_types = [("Supp", 3), ("Hang", 3), ("Cafe", 3), ("Comm", 3), ("HQCP", 3), ("MBld", 3), ("Silo", 6), ("Barr", 6)]
 	
@@ -151,17 +149,20 @@ class Application:
 		""" Main program "entry point" of sorts. """
 
 		print("BZCAIP AIP Generator v1.0.0 Release")
-		print("Copyright (c) 2013 Robert MacGregor")
+		print("Copyright (c) 2014 Robert MacGregor")
 
-		if (len(sys.argv) < 2): die("Usage: %s <RACE> [DESTINATION FOLDER]" % sys.argv[0])
+		if (len(sys.argv) < 3): die("Usage: %s <RACE> <SOURCE FOLDER> [DESTINATION FOLDER]" % sys.argv[0])
 		self.race = sys.argv[1]
 		if (len(self.race) != 1): die("ERROR: Race names must be one letter in length.")
 		
 		# Read the destination folder
-		if (len(sys.argv) == 3):
-			self.write_destination = sys.argv[2]
+		if (len(sys.argv) == 4):
+			self.write_destination = sys.argv[3]
 		else:
 			self.write_destination = self.race
+			
+		# Read the source folder
+		self.data_source = sys.argv[2]
 		
 		# Load config
 		print("Loading config.cfg ...")
@@ -176,8 +177,8 @@ class Application:
 				object_type_count_var = object_type_name + "Count"
 				self.object_types.append((object_type_name, config.get_index(object_type_count_var, int)))
 
-		self.difficulties = difficulties()
-		self.worlds = worlds()
+		self.difficulties = difficulties(self.data_source)
+		self.worlds = worlds(self.data_source)
 
 		# Create the main output dir
 		destination_dir = os.path.join(self.write_destination)
@@ -186,7 +187,6 @@ class Application:
 		# Create the subdirs
 		#os.chdir(destination_dir)
 		for world in self.worlds:
-			print(repr(world[0]))
 			if (world[0] == ""): world = [None, "Moon (default)"] # Hack
 			try: os.makedirs(os.path.join(self.write_destination, world[1]))
 			except OSError: pass
@@ -282,7 +282,7 @@ class Application:
 	def generate_thug(self):
 		""" Thug generation step function call. """
 
-		thug_data = read("data/templ_THUG.aip")
+		thug_data = read(os.path.join(self.data_source, "templ_THUG.aip"))
 		for world in self.worlds:
 			world_filepath = world[1]
 			if (world_filepath == ""): world_filepath = "Moon (default)"

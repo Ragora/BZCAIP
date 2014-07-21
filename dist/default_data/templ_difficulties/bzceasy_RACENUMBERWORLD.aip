@@ -1,0 +1,1784 @@
+// Battlezone Classic AIPs 
+// Created by General BlackDragon
+// With Guidence from Red Devil, GreenHeart, 
+// Script Tools by Vearie, Robert McGregor,  
+//
+// Easy AIP
+
+[Start]
+scrapCount = 10
+consClass = "svcnstREPLACE"
+scavClass = "svscavREPLACE"
+CheckProvides = true
+IdleAllCraft = true
+sendAllUnitsOnStartup = true
+
+Difficulty = 1 // 1=Easy, 2=Medium, 3=Hard, 4=Extreme
+DayWreckerChance = 0.0 // 0% chance for Daywreckers.
+
+//DLLCanSwitch = false // For Debugging...
+
+// This is an Easy AIP, lets not let the AI scrap cheat...
+[Cheat]
+moneyAmount = 0
+moneyDelay = 0
+pilotAmount = 0
+pilotDelay = 15
+
+[IdleDispatcher]
+ScavIdleSeconds = 10 //Must be 10 + or AI won't depoy their recy...
+UnitIdleSeconds = 0 //100 //360
+MinAttackForce = 3 // min # of idle units before dispatch
+MaxAttackForce = 11 // max # of idle units before dispatch
+//MinMissionSeconds = 1500 // Wait this long before switching to another AIP. 
+
+[Match]
+targetType1 = "figh"
+attackType1_1 = "figh"
+attackType1_2 = "figh"
+attackType1_3 = "figh"
+
+targetType2 = "figh"
+attackType2_1 = "ltnk"
+targetType3 = "figh"
+attackType3_1 = "tank"
+targetType4 = "figh"
+attackType4_1 = "rckt"
+
+targetType5 = "ltnk"
+attackType5_1 = "figh"
+attackType5_2 = "figh"
+targetType6 = "ltnk"
+attackType6_1 = "ltnk"
+targetType7 = "ltnk"
+attackType7_1 = "rckt"
+targetType8 = "ltnk"
+attackType8_1 = "tank"
+
+targetType9 = "artl"
+attackType9_1 = "figh"
+attackType9_2 = "figh"
+targetType10 = "artl"
+attackType10_1 = "tank"
+targetType11 = "artl"
+attackType11_1 = "ltnk"
+targetType12 = "artl"
+attackType12_1 = "rckt"
+attackType12_2 = "rckt"
+
+targetType13 = "tank"
+attackType13_1 = "tank"
+targetType14 = "tank"
+attackType14_1 = "rckt"
+attackType14_2 = "rckt"
+targetType15 = "tank"
+attackType15_1 = "ltnk"
+attackType15_2 = "ltnk"
+targetType16 = "tank"
+attackType16_1 = "figh"
+attackType16_2 = "figh"
+targetType17 = "tank"
+attackType17_1 = "apca"
+attackType17_2 = "apca"
+
+targetType18 = "rckt"
+attackType18_1 = "rckt"
+targetType19 = "rckt"
+attackType19_1 = "ltnk"
+attackType19_2 = "ltnk"
+targetType20 = "rckt"
+attackType20_1 = "figh"
+attackType20_2 = "figh"
+attackType20_3 = "figh"
+targetType21 = "rckt"
+attackType21_1 = "tank"
+attackType21_2 = "tank"
+targetType22 = "rckt"
+attackType22_1 = "apca"
+attackType22_2 = "apca"
+attackType22_3 = "apca"
+
+targetType23 = "hraz"
+attackType23_1 = "figh"
+attackType23_2 = "figh"
+attackType23_3 = "figh"
+targetType24 = "hraz"
+attackType24_1 = "hraz"
+targetType25 = "hraz"
+attackType25_1 = "tank"
+attackType25_2 = "tank"
+targetType26 = "hraz"
+attackType26_1 = "ltnk"
+attackType26_2 = "ltnk"
+attackType26_3 = "ltnk"
+targetType27 = "hraz"
+attackType27_1 = "rckt"
+attackType27_2 = "rckt"
+
+targetType28 = "apca"
+attackType28_1 = "apca"
+targetType29 = "apca"
+attackType29_1 = "ltnk"
+attackType29_2 = "ltnk"
+targetType30 = "apca"
+attackType30_1 = "rckt"
+targetType31 = "apca"
+attackType31_1 = "hraz"
+targetType32 = "apca"
+attackType32_1 = "tank"
+attackType32_2 = "tank"
+
+targetType33 = "walk"
+attackType33_1 = "walk"
+targetType34 = "walk"
+attackType34_1 = "rckt"
+attackType34_2 = "rckt"
+targetType35 = "walk"
+attackType35_1 = "tank"
+attackType35_2 = "tank"
+attackType35_3 = "tank"
+targetType36 = "walk"
+attackType36_1 = "ltnk"
+attackType36_2 = "ltnk"
+attackType36_3 = "ltnk"
+
+targetType37 = "towe"
+attackType37_1 = "walk"
+attackType37_2 = "walk"
+attackType37_3 = "walk"
+targetType38 = "towe"
+attackType38_1 = "hraz"
+attackType38_2 = "hraz"
+attackType38_3 = "hraz"
+targetType39 = "towe"
+attackType39_1 = "rckt"
+attackType39_2 = "rckt"
+attackType39_3 = "rckt"
+attackType39_4 = "rckt"
+targetType40 = "towe"
+attackType40_1 = "tank"
+attackType40_2 = "tank"
+attackType40_3 = "tank"
+attackType40_4 = "tank"
+
+targetType41 = "turr"
+attackType41_1 = "rckt"
+attackType41_2 = "rckt"
+targetType42 = "turr"
+attackType42_1 = "figh"
+attackType42_2 = "figh"
+targetType43 = "turr"
+attackType43_1 = "ltnk"
+attackType43_2 = "ltnk"
+targetType44 = "turr"
+attackType44_1 = "tank"
+attackType44_2 = "tank"
+
+targetType45 = "minea"
+attackType45_1 = "figh"
+attackType45_2 = "figh"
+targetType46 = "minea"
+attackType46_1 = "ltnk"
+targetType47 = "minea"
+attackType47_1 = "rckt"
+targetType48 = "minea"
+attackType48_1 = "tank"
+
+targetType49 = "base"
+attackType49_1 = "walk"
+attackType49_2 = "walk"
+attackType49_3 = "walk"
+targetType50 = "base"
+attackType50_1 = "hraz"
+attackType50_2 = "hraz"
+attackType50_3 = "hraz"
+targetType51 = "base"
+attackType51_1 = "rckt"
+attackType51_2 = "rckt"
+attackType51_3 = "rckt"
+attackType51_4 = "rckt"
+targetType52 = "base"
+attackType52_1 = "tank"
+attackType52_2 = "tank"
+attackType52_3 = "tank"
+attackType52_4 = "tank"
+targetType53 = "base"
+attackType53_1 = "ltnk"
+attackType53_2 = "ltnk"
+attackType53_3 = "ltnk"
+attackType53_4 = "ltnk"
+targetType54 = "base"
+attackType54_1 = "figh"
+attackType54_2 = "figh"
+attackType54_3 = "figh"
+attackType54_4 = "figh"
+//targetType55 = "base"
+//attackType55_1 = "apca"
+//attackType55_2 = "apca"
+//attackType55_3 = "apca"
+//attackType55_4 = "apca"
+
+// Lets tell the AI Recycler to deploy, and hopefully build us some stuff.
+[Plan1]
+planType = "CollectPool"
+planPriority = 999
+planCondition = "Exists"
+planConditionClass = "svrecy"
+planConditionCount = 1
+planConditionClassProvided = true
+planCompare = ">=" 
+planConditionOr = false
+
+planCondition2 = "NotExists"
+planConditionClass2 = "sbrecy"
+planConditionCount2 = 1
+planConditionClassProvided2 = true
+planCompare2 = ">=" 
+
+scavClass = "svrecy"
+maxTries = 0
+
+// So, if the recycler successfully deployed, lets build some scavvies :)
+[Plan5]
+planType = "BuildLoop" // Always try to put scavs out on the field.
+planPriority = 998
+planCondition = "Exists"
+planConditionClass = "sbrecy"
+planConditionCount = 1
+planConditionClassProvided = true
+planCompare = ">=" 
+planConditionOr = false
+
+planCondition2 = "NotExists"
+planConditionClass2 = "scav"
+planConditionCount2 = 3 // No scavs!??!?! Build some!
+planConditionClassProvided2 = true
+planCompare2 = ">=" 
+
+MinTtlScrap = 4
+maxLoops = 9999 // Only try to do this 9999 times, how hard could it be??
+loopDelay = 120 // Wait atleast 2 minutes between this so the player can't make us stuck...
+buildType1 = "svscavREPLACE"
+buildCount1 = 3
+
+// Now that we have a scavvy, tell it to get to work, because we all know how lazy those scavengers are.
+[Plan10]
+planType = "CollectField"
+planPriority = 997
+planCondition = "Exists"
+planConditionClass = "scav"
+planConditionCount = 3
+planConditionClassProvided = true
+planCompare = ">=" 
+
+scavClass = "scav"
+
+// If you're bored, build a unit factory.
+[Plan20]
+planType = "BuildLoop"
+planPriority = 996
+planCondition = "Exists"
+planConditionClass = "sbrecy"
+planConditionCount = 1
+planCompare = ">=" 
+planConditionClassProvided = true
+planConditionOr = false
+
+planCondition2 = "NotExists"
+planConditionClass2 = "svmuf"
+planConditionCount2 = 1
+planCompare2 = ">=" 
+planConditionClassProvided2 = true
+planConditionOr2 = false
+
+planCondition3 = "NotExists"
+planConditionClass3 = "sbmuf"
+planConditionCount3 = 1
+planCompare3 = ">=" 
+planConditionClassProvided3 = true
+
+MinTtlScrap = 10
+maxLoops = 1 //Only try to do this once...
+loopDelay = 300 // Wait 5 minutes before trying again...
+buildType1 = "svmufREPLACE"
+buildCount1 = 1
+
+// Tell that unit factory what to do.
+[Plan25]
+planType = "CollectPool"
+planPriority = 995
+planCondition = "Exists"
+planConditionClass = "svmuf"
+planConditionCount = 1
+planCompare = ">="
+planConditionClassProvided = true
+planConditionOr = false
+
+scavClass = "svmuf"
+maxTries = 0
+
+// We should probably build an armory, just for decoration...
+[Plan30]
+planType = "BuildLoop"
+planPriority = 994
+planCondition = "Exists"
+planConditionClass = "sbrecy"
+planConditionCount = 1
+planCompare = ">="
+planConditionClassProvided = true
+planConditionOr = false
+
+planCondition2 = "NotExists"
+planConditionClass2 = "svslf"
+planConditionCount2 = 1
+planCompare2 = ">="
+planConditionClassProvided2 = true
+planConditionOr2 = false
+
+planCondition3 = "NotExists"
+planConditionClass3 = "sbslf"
+planConditionCount3 = 1
+planCompare3 = ">="
+planConditionClassProvided3 = true
+
+MinTtlScrap = 6
+maxLoops = 1 // Only try to do this once...
+loopDelay = 300 // Wait 5 minutes before trying again...
+buildType1 = "svslfREPLACE"
+buildCount1 = 1
+
+// Armory, away!
+[Plan35]
+planType = "CollectPool"
+planPriority = 993
+planCondition = "Exists"
+planConditionClass = "svslf"
+planConditionCount = 1
+planCompare = ">=" 
+planConditionClassProvided = true
+planConditionOr = false
+
+scavClass = "svslf"
+maxTries = 0
+
+[Plan40]
+planType = "DefendArea"
+planPriority = 992
+planCondition = "Exists"
+planConditionClass = "offense"
+planConditionCount = 1
+planCompare = ">="
+planConditionClassProvided = true
+planConditionOr = false
+
+planCondition2 = "Exists"
+planConditionClass2 = "sbrecy"
+planConditionCount2 = 1
+planCompare2 = ">="
+planConditionClassProvided2 = true
+pickTargetType = 2
+
+targetType = "sbrecy"
+ContinueEvenIfFail = true 
+
+// Lets go keep the player busy...
+//[Plan45]
+//planType = "Attacker"
+//planPriority = 991
+//planCondition = "HisExists"
+//planConditionClass = "recy"
+//planConditionCount = 1
+//planCompare = ">=" 
+//planConditionClassProvided = true
+//planConditionOr = false
+
+//planCondition2 = "Exists"
+//planConditionClass2 = "figh"
+//planConditionCount2 = 3
+//planCompare2 = ">="  // We have 3 or more fighters? okay, send them to poke the enemy...
+//planConditionClassProvided2 = true
+
+//targetType = "recy"
+//attackType1 = "svfigh"
+//attackType2 = "svfigh"
+//attackType3 = "svfigh"
+//maxAttacks = 5
+//maxTries = 10
+//buildIfNoIdle = 1 // Don't try to build any, just skip if the build loop hasn't made some...
+//ContinueEvenIfFail = true 
+
+// Lets setup some defences so the player can chew through them in half a minute.
+[Plan50]
+planType = "BuildLoop"
+planPriority = 990
+planCondition = "Exists"
+planConditionClass = "sbrecy"
+planConditionCount = 1
+planCompare = ">="
+planConditionClassProvided = true
+planConditionOr = false
+planCondition2 = "NotExists"
+planConditionClass2 = "turr"
+planConditionCount2 = 4
+planCompare2 = ">="
+planConditionClassProvided2 = true
+
+MinTtlScrap = 8
+maxLoops = 999 // Only try this 999 times...
+loopDelay = 120 // Wait 2 minutes before trying again...
+buildType1 = "svturrAIREPLACE"
+buildCount1 = 4
+//ContinueEvenIfFail = true
+
+[Plan71]
+planType = "ClearArea"
+CheckEngageRange = false
+CheckProvides = true
+planPriority = 940
+planCondition = "Exists"
+planConditionClass = "offense"
+planConditionCount = 15
+planCompare = ">="
+planConditionClassProvided = true
+planCondition2 = "HisExists"
+planConditionClass2 = "base"
+planCompare2 = ">="
+planConditionCount2 = 1
+planConditionClassProvided2 = true
+ForceStagePoint = 2
+pickTargetType = 2
+MaxUnits = 3
+searchRadius = 400
+targetType = "base"
+ContinueEvenIfFail = true
+
+[Plan72]
+planType = "ClearArea"
+CheckEngageRange = false
+CheckProvides = true
+planPriority = 945
+planCondition = "Exists"
+planConditionClass = "offense"
+planConditionCount = 3
+planCompare = ">="
+planConditionClassProvided = true
+planCondition2 = "NotHisExists"
+planConditionClass2 = "muf"
+planCompare2 = ">="
+planConditionCount2 = 1
+planConditionClassProvided2 = true
+ForceStagePoint = 1
+pickTargetType = 2
+MaxUnits = 3
+searchRadius = 400
+targetType = "base"
+ContinueEvenIfFail = true
+
+[Plan73]
+planType = "ClearArea"
+CheckEngageRange = false
+CheckProvides = true
+planPriority = 950
+planCondition = "Exists"
+planConditionClass = "offense"
+planConditionCount = 6
+planCompare = ">="
+planConditionClassProvided = true
+planCondition2 = "NotHisExists"
+planConditionClass2 = "towe"
+planCompare2 = "<="
+planConditionCount2 = 4
+planConditionClassProvided2 = true
+ForceStagePoint = 3
+pickTargetType = 2
+MaxUnits = 6
+searchRadius = 400
+targetType = "base"
+ContinueEvenIfFail = true
+
+[Plan74]
+planType = "ClearArea"
+CheckEngageRange = false
+CheckProvides = true
+planPriority = 955
+planCondition = "Exists"
+planConditionClass = "offense"
+planConditionCount = 6
+planCompare = ">="
+planConditionClassProvided = true
+planCondition2 = "HisExists"
+planConditionClass2 = "towe"
+planCompare2 = ">="
+planConditionCount2 = 6
+planConditionClassProvided2 = true
+planCondition3 = "NotHisExists"
+planConditionClass3 = "comm"
+planCompare3 = ">="
+planConditionCount3 = 1
+planConditionClassProvided3 = true
+ForceStagePoint = 3
+pickTargetType = 2
+MaxUnits = 10
+searchRadius = 400
+targetType = "pow"
+ContinueEvenIfFail = true
+
+[Plan75]
+planType = "ClearArea"
+CheckEngageRange = false
+CheckProvides = true
+planPriority = 960
+planCondition = "Exists"
+planConditionClass = "offense"
+planConditionCount = 6
+planCompare = ">="
+planConditionClassProvided = true
+planCondition2 = "HisExists"
+planConditionClass2 = "towe"
+planCompare2 = ">="
+planConditionCount2 = 5
+planConditionClassProvided2 = true
+planCondition3 = "NotHisExists"
+planConditionClass3 = "pow"
+planCompare3 = ">="
+planConditionCount3 = 5
+planConditionClassProvided3 = true
+ForceStagePoint = 2
+pickTargetType = 2
+MaxUnits = 6
+searchRadius = 400
+targetType = "base"
+ContinueEvenIfFail = true
+
+[Plan76]
+planType = "ClearArea"
+CheckEngageRange = false
+CheckProvides = true
+planPriority = 965
+planCondition = "Exists"
+planConditionClass = "offense"
+planConditionCount = 8
+planCompare = ">="
+planConditionClassProvided = true
+planCondition2 = "HisExists"
+planConditionClass2 = "offense"
+planCompare2 = ">="
+planConditionCount2 = 6
+planConditionClassProvided2 = true
+ForceStagePoint = 1
+pickTargetType = 2
+MaxUnits = 15
+searchRadius = 400
+targetType = "muf"
+ContinueEvenIfFail = true
+
+[Plan77]
+planType = "ClearArea"
+CheckEngageRange = false
+CheckProvides = true
+planPriority = 970
+planCondition = "Exists"
+planConditionClass = "offense"
+planConditionCount = 6
+planCompare = ">="
+planConditionClassProvided = true
+planCondition2 = "HisExists"
+planConditionClass2 = "apca"
+planCompare2 = ">="
+planConditionCount2 = 6
+planConditionClassProvided2 = true
+ForceStagePoint = 3
+pickTargetType = 2
+MaxUnits = 15
+searchRadius = 400
+targetType = "apca"
+ContinueEvenIfFail = true
+
+[Plan78]
+planType = "ClearArea"
+CheckEngageRange = false
+CheckProvides = true
+planPriority = 975
+planCondition = "Exists"
+planConditionClass = "offense"
+planConditionCount = 10
+planCompare = ">="
+planConditionClassProvided = true
+planCondition2 = "HisExists"
+planConditionClass2 = "siloa"
+planCompare2 = ">="
+planConditionCount2 = 1
+planConditionClassProvided2 = true
+planCondition3 = "HisExists"
+planConditionClass3 = "comm"
+planCompare3 = ">="
+planConditionCount3 = 1
+planConditionClassProvided3 = true
+planCondition4 = "NotHisExists"
+planConditionClass4 = "barr"
+planCompare4 = ">="
+planConditionCount4 = 3
+planConditionClassProvided4 = true
+ForceStagePoint = 2
+pickTargetType = 2
+MaxUnits = 8
+searchRadius = 400
+targetType = "offense"
+ContinueEvenIfFail = true
+
+[Plan79]
+planType = "ClearArea"
+CheckEngageRange = false
+CheckProvides = true
+planPriority = 980
+planCondition = "Exists"
+planConditionClass = "offense"
+planConditionCount = 10
+planCompare = ">="
+planConditionClassProvided = true
+planCondition2 = "HisExists"
+planConditionClass2 = "base"
+planCompare2 = ">="
+planConditionCount2 = 15
+planConditionClassProvided2 = true
+ForceStagePoint = 1
+pickTargetType = 2
+MaxUnits = 15
+searchRadius = 400
+targetType = "base"
+ContinueEvenIfFail = true
+
+// Man, if that player hasn't deployed their Recycler by now, they must be askin for it...Give it to 'em.
+[Plan80]
+planType = "BuildLoop"
+planPriority = 900
+planCondition = "Exists"
+planConditionClass = "sbrecy"
+planConditionCount = 1
+planConditionClassProvided = true
+
+planCondition2 = "NotExists"
+planConditionClass2 = "cnst"
+planConditionCount2 = 1
+planCompare2 = ">="
+planConditionClassProvided2 = true
+planConditionOr2 = false
+
+MinTtlScrap = 8
+maxLoops = 10 // Only build this loop 10 times, then concentrate on other stuff...
+loopDelay = 120 // Wait 2 minutes before building more
+buildType1 = "svcnstREPLACE"
+buildCount1 = 1
+
+// Start the recursive build loops to keep offensive ships going.
+
+[Plan81]
+planType = "BuildLoop"
+planPriority = 895
+planCondition = "Exists"
+planConditionClass = "sbrecy"
+planConditionCount = 1
+planCompare = ">="
+planConditionClassProvided = true
+planConditionOr = false
+
+planCondition2 = "NotHisExists"
+planConditionClass2 = "muf"
+planConditionCount2 = 1
+planCompare2 = ">="
+planConditionClassProvided2 = true
+planConditionOr2 = false
+
+planCondition3 = "NotExists"
+planConditionClass3 = "offense"
+planConditionCount3 = 3
+planCompare3 = ">="
+planConditionClassProvided3 = true
+planConditionOr3 = false
+
+MinTtlScrap = 24
+maxLoops = 10 // Only build this loop 10 times, then concentrate on other stuff...
+loopDelay = 180 // Wait 3 minutes before building more
+buildType1 = "svfighREPLACE"
+buildCount1 = 3
+ContinueEvenIfFail = true 
+
+[Plan82]
+planType = "BuildLoop"
+planPriority = 890
+planCondition = "Exists"
+planConditionClass = "sbmuf"
+planConditionCount = 1
+planCompare = ">="
+planConditionClassProvided = true
+planConditionOr = false
+
+planCondition2 = "NotHisExists"
+planConditionClass2 = "towe"
+planConditionCount2 = 3
+planCompare2 = ">="
+planConditionClassProvided2 = true
+planConditionOr2 = false
+
+planCondition3 = "NotExists"
+planConditionClass3 = "offense"
+planConditionCount3 = 5
+planCompare3 = ">="
+planConditionClassProvided3 = true
+planConditionOr3 = false
+
+MinTtlScrap = 24
+maxLoops = 10 // Only build this loop 10 times, then concentrate on other stuff...
+loopDelay = 180 // Wait 3 minutes before building more
+buildType1 = "svltnkREPLACE"
+buildCount1 = 2
+buildType2 = "svtankREPLACE"
+buildCount2 = 2
+buildType3 = "svrcktREPLACE"
+buildCount3 = 1
+ContinueEvenIfFail = true 
+
+[Plan83]
+planType = "BuildLoop"
+planPriority = 885
+planCondition = "Exists"
+planConditionClass = "sbmuf"
+planConditionCount = 1
+planCompare = ">="
+planConditionClassProvided = true
+planConditionOr = false
+
+planCondition2 = "HisExists"
+planConditionClass2 = "towe"
+planConditionCount2 = 3
+planCompare2 = ">="
+planConditionClassProvided2 = true
+planConditionOr2 = false
+
+planCondition3 = "NotExists"
+planConditionClass3 = "offense"
+planConditionCount3 = 5
+planCompare3 = ">="
+planConditionClassProvided3 = true
+planConditionOr3 = false
+
+MinTtlScrap = 24
+maxLoops = 10 // Only build this loop 10 times, then concentrate on other stuff...
+loopDelay = 300 // Wait 5 minutes before building more
+buildType1 = "svrcktREPLACE"
+buildCount1 = 2
+buildType2 = "svhrazREPLACE"
+buildCount2 = 2
+buildType3 = "svapcREPLACE"
+buildCount3 = 1
+ContinueEvenIfFail = true 
+MinMissionSeconds = 300
+
+[Plan84]
+planType = "BuildLoop"
+planPriority = 880
+planCondition = "Exists"
+planConditionClass = "sbmuf"
+planConditionCount = 1
+planCompare = ">="
+planConditionClassProvided = true
+planConditionOr = false
+
+planCondition2 = "HisExists"
+planConditionClass2 = "pow"
+planConditionCount2 = 2
+planCompare2 = ">="
+planConditionClassProvided2 = true
+planConditionOr2 = false
+
+planCondition3 = "NotExists"
+planConditionClass3 = "offense"
+planConditionCount3 = 5
+planCompare3 = ">="
+planConditionClassProvided3 = true
+planConditionOr3 = false
+
+MinTtlScrap = 24
+maxLoops = 10 // Only build this loop 10 times, then concentrate on other stuff...
+loopDelay = 300 // Wait 5 minutes before building more
+buildType1 = "svapcREPLACE"
+buildCount1 = 2
+buildType2 = "svhrazREPLACE"
+buildCount2 = 2
+buildType3 = "svltnkREPLACE"
+buildCount3 = 2
+ContinueEvenIfFail = true 
+MinMissionSeconds = 360
+
+[Plan85]
+planType = "BuildLoop"
+planPriority = 875
+planCondition = "Exists"
+planConditionClass = "sbrecy"
+planConditionCount = 1
+planCompare = ">="
+planConditionClassProvided = true
+planConditionOr = false
+
+planCondition2 = "Exists"
+planConditionClass2 = "sbmuf"
+planConditionCount2 = 1
+planCompare2 = ">="
+planConditionClassProvided2 = true
+planConditionOr2 = false
+
+planCondition3 = "HisExists"
+planConditionClass3 = "slf"
+planConditionCount3 = 1
+planCompare3 = ">="
+planConditionClassProvided3 = true
+planConditionOr3 = false
+
+planCondition4 = "HisExists"
+planConditionClass4 = "offense"
+planConditionCount4 = 4
+planCompare4 = ">="
+planConditionClassProvided4 = true
+planConditionOr4 = false
+
+planCondition5 = "NotExists"
+planConditionClass5 = "offense"
+planConditionCount5 = 5
+planCompare5 = ">="
+planConditionClassProvided5 = true
+planConditionOr5 = false
+
+MinTtlScrap = 24
+maxLoops = 10 // Only build this loop 10 times, then concentrate on other stuff...
+loopDelay = 120 // Wait 2 minutes before building more
+buildType1 = "svltnkREPLACE"
+buildCount1 = 3
+buildType2 = "svrcktREPLACE"
+buildCount2 = 3
+buildType3 = "svfighREPLACE"
+buildCount3 = 2
+ContinueEvenIfFail = true 
+
+[Plan86]
+planType = "BuildLoop"
+planPriority = 870
+planCondition = "Exists"
+planConditionClass = "sbrecy"
+planConditionCount = 1
+planCompare = ">="
+planConditionClassProvided = true
+planConditionOr = false
+
+planCondition2 = "Exists"
+planConditionClass2 = "sbmuf"
+planConditionCount2 = 1
+planCompare2 = ">="
+planConditionClassProvided2 = true
+planConditionOr2 = false
+
+planCondition3 = "HisExists"
+planConditionClass3 = "apca"
+planConditionCount3 = 3
+planCompare3 = ">="
+planConditionClassProvided3 = true
+planConditionOr3 = false
+
+planCondition4 = "NotExists"
+planConditionClass4 = "hraz"
+planConditionCount4 = 4
+planCompare4 = ">="
+planConditionClassProvided4 = true
+planConditionOr4 = false
+
+MinTtlScrap = 24
+maxLoops = 10 // Only build this loop 10 times, then concentrate on other stuff...
+loopDelay = 180 // Wait 3 minutes before building more
+buildType1 = "svhrazREPLACE"
+buildCount1 = 4
+ContinueEvenIfFail = true 
+
+[Plan87]
+planType = "BuildLoop"
+planPriority = 865
+planCondition = "Exists"
+planConditionClass = "sbrecy"
+planConditionCount = 1
+planCompare = ">="
+planConditionClassProvided = true
+planConditionOr = false
+
+planCondition2 = "Exists"
+planConditionClass2 = "sbmuf"
+planConditionCount2 = 1
+planCompare2 = ">="
+planConditionClassProvided2 = true
+planConditionOr2 = false
+
+planCondition3 = "HisExists"
+planConditionClass3 = "muf"
+planConditionCount3 = 1
+planCompare3 = ">="
+planConditionClassProvided3 = true
+planConditionOr3 = false
+
+planCondition4 = "NotExists"
+planConditionClass4 = "offense"
+planConditionCount4 = 6
+planCompare4 = ">="
+planConditionClassProvided4 = true
+planConditionOr4 = false
+
+MinTtlScrap = 24
+maxLoops = 10 // Only build this loop 10 times, then concentrate on other stuff...
+loopDelay = 120 // Wait 2 minutes before building more
+buildType1 = "svrcktREPLACE"
+buildCount1 = 2
+buildType2 = "svtankREPLACE"
+buildCount2 = 2
+buildType3 = "svfighREPLACE"
+buildCount3 = 2
+buildType4 = "svltnkREPLACE"
+buildCount4 = 1
+ContinueEvenIfFail = true 
+
+[Plan88]
+planType = "BuildLoop"
+planPriority = 860
+planCondition = "Exists"
+planConditionClass = "sbmuf"
+planConditionCount = 1
+planCompare = ">="
+planConditionClassProvided = true
+planConditionOr = false
+
+planCondition2 = "HisExists"
+planConditionClass2 = "towe"
+planConditionCount2 = 6
+planCompare2 = ">="
+planConditionClassProvided2 = true
+planConditionOr2 = false
+
+planCondition3 = "NotExists"
+planConditionClass3 = "hraz"
+planConditionCount3 = 4
+planCompare3 = ">="
+planConditionClassProvided3 = true
+planConditionOr3 = false
+
+MinTtlScrap = 24
+maxLoops = 10 // Only build this loop 10 times, then concentrate on other stuff...
+loopDelay = 180 // Wait 3 minutes before building more
+buildType1 = "svhrazREPLACE"
+buildCount1 = 4
+ContinueEvenIfFail = true 
+MinMissionSeconds = 500
+
+[Plan89]
+planType = "BuildLoop"
+planPriority = 855
+planCondition = "Exists"
+planConditionClass = "sbmuf"
+planConditionCount = 1
+planCompare = ">="
+planConditionClassProvided = true
+planConditionOr = false
+
+MinTtlScrap = 24
+maxLoops = 10 // Only build this loop 10 times, then concentrate on other stuff...
+loopDelay = 180 // Wait 3 minutes before building more
+buildType1 = "svltnkREPLACE"
+buildCount1 = 2
+buildType2 = "svtankREPLACE"
+buildCount2 = 3
+ContinueEvenIfFail = true 
+MinMissionSeconds = 600
+
+[Plan90]
+planType = "BuildLoop"
+planPriority = 850
+planCondition = "Exists"
+planConditionClass = "sbrecy"
+planConditionCount = 1
+planCompare = ">="
+planConditionClassProvided = true
+planConditionOr = false
+
+planCondition2 = "Exists"
+planConditionClass2 = "sbmuf"
+planConditionCount2 = 1
+planCompare2 = ">="
+planConditionClassProvided2 = true
+planConditionOr2 = false
+
+planCondition3 = "HisExists"
+planConditionClass3 = "towe"
+planConditionCount3 = 4
+planCompare3 = ">="
+planConditionClassProvided3 = true
+planConditionOr3 = false
+
+MinTtlScrap = 24
+maxLoops = 10 // Only build this loop 10 times, then concentrate on other stuff...
+loopDelay = 120 // Wait 2 minutes before building more
+buildType1 = "svapcREPLACE"
+buildCount1 = 2
+buildType2 = "svtankREPLACE"
+buildCount2 = 2
+buildType3 = "svfighREPLACE"
+buildCount3 = 2
+buildType4 = "svhrazREPLACE"
+buildCount4 = 1
+ContinueEvenIfFail = true 
+MinMissionSeconds = 700
+
+[Plan91]
+planType = "BuildLoop"
+planPriority = 845
+planCondition = "Exists"
+planConditionClass = "sbrecy"
+planConditionCount = 1
+planCompare = ">="
+planConditionClassProvided = true
+planConditionOr = false
+
+planCondition2 = "Exists"
+planConditionClass2 = "sbmuf"
+planConditionCount2 = 1
+planCompare2 = ">="
+planConditionClassProvided2 = true
+planConditionOr2 = false
+
+MinTtlScrap = 24
+maxLoops = 10 // Only build this loop 10 times, then concentrate on other stuff...
+loopDelay = 180 // Wait 3 minutes before building more
+buildType1 = "svltnkREPLACE"
+buildCount1 = 2
+buildType2 = "svtankREPLACE"
+buildCount2 = 2
+buildType3 = "svfighREPLACE"
+buildCount3 = 2
+buildType4 = "svapcREPLACE"
+buildCount4 = 1
+ContinueEvenIfFail = true 
+MinMissionSeconds = 800
+
+[Plan92]
+planType = "BuildLoop"
+planPriority = 840
+planCondition = "Exists"
+planConditionClass = "sbrecy"
+planConditionCount = 1
+planCompare = ">="
+planConditionClassProvided = true
+planConditionOr = false
+
+planCondition2 = "Exists"
+planConditionClass2 = "sbmuf"
+planConditionCount2 = 1
+planCompare2 = ">="
+planConditionClassProvided2 = true
+planConditionOr2 = false
+
+MinTtlScrap = 24
+maxLoops = 10 // Only build this loop 10 times, then concentrate on other stuff...
+loopDelay = 360 // Wait 6 minutes before building more
+buildType1 = "svapcREPLACE"
+buildCount1 = 3
+buildType2 = "svtankREPLACE"
+buildCount2 = 3
+buildType3 = "svfighREPLACE"
+buildCount3 = 3
+buildType4 = "svhrazREPLACE"
+buildCount4 = 1
+ContinueEvenIfFail = true 
+MinMissionSeconds = 800
+
+[Plan93]
+planType = "BuildLoop"
+planPriority = 835
+planCondition = "Exists"
+planConditionClass = "sbrecy"
+planConditionCount = 1
+planCompare = ">="
+planConditionClassProvided = true
+planConditionOr = false
+
+planCondition2 = "Exists"
+planConditionClass2 = "sbmuf"
+planConditionCount2 = 1
+planCompare2 = ">="
+planConditionClassProvided2 = true
+planConditionOr2 = false
+
+planCondition3 = "HisExists"
+planConditionClass3 = "offense"
+planConditionCount3 = 10
+planCompare3 = ">="
+planConditionClassProvided3 = true
+planConditionOr3 = false
+
+MinTtlScrap = 24
+maxLoops = 10 // Only build this loop 10 times, then concentrate on other stuff...
+loopDelay = 120 // Wait 2 minutes before building more
+buildType1 = "svapcREPLACE"
+buildCount1 = 4
+buildType2 = "svtankREPLACE"
+buildCount2 = 3
+buildType3 = "svfighREPLACE"
+buildCount3 = 3
+buildType4 = "svhrazREPLACE"
+buildCount4 = 4
+ContinueEvenIfFail = true 
+
+[Plan94]
+planType = "BuildLoop"
+planPriority = 830
+planCondition = "Exists"
+planConditionClass = "sbmuf"
+planConditionCount = 1
+planCompare = ">="
+planConditionClassProvided = true
+planConditionOr = false
+
+MinTtlScrap = 24
+maxLoops = 10 // Only build this loop 10 times, then concentrate on other stuff...
+loopDelay = 120 // Wait 2 minutes before building more
+buildType1 = "svltnkREPLACE"
+buildCount1 = 2
+buildType2 = "svtankREPLACE"
+buildCount2 = 2
+buildType3 = "svrcktREPLACE"
+buildCount3 = 2
+ContinueEvenIfFail = true 
+MinMissionSeconds = 750
+
+[Plan95]
+planType = "BuildLoop"
+planPriority = 825
+planCondition = "Exists"
+planConditionClass = "sbrecy"
+planConditionCount = 1
+planCompare = ">="
+planConditionClassProvided = true
+planConditionOr = false
+
+planCondition2 = "HisExists"
+planConditionClass2 = "walk"
+planConditionCount2 = 5
+planCompare2 = ">="
+planConditionClassProvided2 = true
+planConditionOr2 = false
+
+MinTtlScrap = 24
+maxLoops = 10 // Only build this loop 10 times, then concentrate on other stuff...
+loopDelay = 180 // Wait 3 minutes before building more
+buildType1 = "svfighREPLACE"
+buildCount1 = 6
+ContinueEvenIfFail = true 
+
+[Plan96]
+planType = "BuildLoop"
+planPriority = 820
+planCondition = "Exists"
+planConditionClass = "sbmuf"
+planConditionCount = 1
+planCompare = ">="
+planConditionClassProvided = true
+planConditionOr = false
+
+planCondition2 = "HisExists"
+planConditionClass2 = "walk"
+planConditionCount2 = 5
+planCompare2 = ">="
+planConditionClassProvided2 = true
+planConditionOr2 = false
+
+MinTtlScrap = 24
+maxLoops = 10 // Only build this loop 10 times, then concentrate on other stuff...
+loopDelay = 300 // Wait 5 minutes before building more
+buildType1 = "svhrazREPLACE"
+buildCount1 = 6
+ContinueEvenIfFail = true 
+
+[Plan97]
+planType = "BuildLoop"
+planPriority = 815
+planCondition = "Exists"
+planConditionClass = "sbrecy"
+planConditionCount = 1
+planCompare = ">="
+planConditionClassProvided = true
+planConditionOr = false
+
+planCondition2 = "Exists"
+planConditionClass2 = "sbmuf"
+planConditionCount2 = 1
+planCompare2 = ">="
+planConditionClassProvided2 = true
+planConditionOr2 = false
+
+planCondition3 = "HisExists"
+planConditionClass3 = "barr"
+planConditionCount3 = 3
+planCompare3 = ">="
+planConditionClassProvided3 = true
+planConditionOr3 = false
+
+MinTtlScrap = 24
+maxLoops = 10 // Only build this loop 10 times, then concentrate on other stuff...
+loopDelay = 180 // Wait 3 minutes before building more
+buildType1 = "svrcktREPLACE"
+buildCount1 = 3
+buildType1 = "svltnkREPLACE"
+buildCount1 = 3
+buildType1 = "svhrazREPLACE"
+buildCount1 = 3
+ContinueEvenIfFail = true 
+MinMissionSeconds = 500
+
+[Plan98]
+planType = "BuildLoop"
+planPriority = 810
+planCondition = "Exists"
+planConditionClass = "sbrecy"
+planConditionCount = 1
+planCompare = ">="
+planConditionClassProvided = true
+planConditionOr = false
+
+planCondition2 = "Exists"
+planConditionClass2 = "sbmuf"
+planConditionCount2 = 1
+planCompare2 = ">="
+planConditionClassProvided2 = true
+planConditionOr2 = false
+
+planCondition3 = "HisExists"
+planConditionClass3 = "muf"
+planConditionCount3 = 3
+planCompare3 = ">="
+planConditionClassProvided3 = true
+planConditionOr3 = false
+
+MinTtlScrap = 24
+maxLoops = 10 // Only build this loop 10 times, then concentrate on other stuff...
+loopDelay = 180 // Wait 2 minutes before building more
+buildType1 = "svltnkREPLACE"
+buildCount1 = 3
+buildType1 = "svtankREPLACE"
+buildCount1 = 2
+buildType1 = "svhrazREPLACE"
+buildCount1 = 2
+ContinueEvenIfFail = true 
+MinMissionSeconds = 600
+
+[Plan99]
+planType = "BuildLoop"
+planPriority = 805
+planCondition = "Exists"
+planConditionClass = "sbrecy"
+planConditionCount = 1
+planCompare = ">="
+planConditionClassProvided = true
+planConditionOr = false
+
+planCondition2 = "Exists"
+planConditionClass2 = "sbmuf"
+planConditionCount2 = 1
+planCompare2 = ">="
+planConditionClassProvided2 = true
+planConditionOr2 = false
+
+planCondition3 = "HisExists"
+planConditionClass3 = "hang"
+planConditionCount3 = 1
+planCompare3 = ">="
+planConditionClassProvided3 = true
+planConditionOr3 = false
+
+MinTtlScrap = 24
+maxLoops = 10 // Only build this loop 10 times, then concentrate on other stuff...
+loopDelay = 120 // Wait 2 minutes before building more
+buildType1 = "svapcREPLACE"
+buildCount1 = 3
+buildType1 = "svtankREPLACE"
+buildCount1 = 2
+buildType1 = "svhrazREPLACE"
+buildCount1 = 2
+ContinueEvenIfFail = true 
+MinMissionSeconds = 750
+
+[Plan100]
+planType = "BuildLoop"
+planPriority = 800
+planCondition = "Exists"
+planConditionClass = "sbrecy"
+planConditionCount = 1
+planCompare = ">="
+planConditionClassProvided = true
+planConditionOr = false
+
+planCondition2 = "Exists"
+planConditionClass2 = "sbmuf"
+planConditionCount2 = 1
+planCompare2 = ">="
+planConditionClassProvided2 = true
+planConditionOr2 = false
+
+planCondition3 = "HisExists"
+planConditionClass3 = "scav"
+planConditionCount3 = 5
+planCompare3 = ">="
+planConditionClassProvided3 = true
+planConditionOr3 = false
+
+MinTtlScrap = 24
+maxLoops = 10 // Only build this loop 10 times, then concentrate on other stuff...
+loopDelay = 180 // Wait 3 minutes before building more
+buildType1 = "svhrazREPLACE"
+buildCount1 = 4
+buildType1 = "svapcREPLACE"
+buildCount1 = 4
+buildType1 = "svrcktREPLACE"
+buildCount1 = 4
+ContinueEvenIfFail = true 
+MinMissionSeconds = 500
+
+[Plan101]
+planType = "BaseBuildMinimums"
+planPriority = 878
+planCondition = "Exists"
+planConditionClass = "svcnst"
+planConditionCount = 1
+planConditionClassProvided = true
+planCondition2 = "NotPathBuildingExists"
+planConditionPath2 = "0SPow1"
+MinTtlScrap = 4
+buildType1 = "sbspow"
+buildCount1 = 1
+buildLoc1 = "0SPow1"
+maxTries = 1
+pathpointsCanBeMissing = true
+//ContinueEvenIfFail = true
+
+[Plan102]
+planType = "BaseBuildMinimums"
+planPriority = 877
+planCondition = "Exists"
+planConditionClass = "svcnst"
+planConditionCount = 1
+planConditionClassProvided = true
+planCondition2 = "NotPathBuildingExists"
+planConditionPath2 = "0GTow11"
+MinTtlScrap = 6
+buildType1 = "sbtowe"
+buildCount1 = 1
+buildLoc1 = "0GTow11"
+maxTries = 1
+pathpointsCanBeMissing = true
+//ContinueEvenIfFail = true
+
+[Plan103]
+planType = "BaseBuildMinimums"
+planPriority = 876
+planCondition = "Exists"
+planConditionClass = "svcnst"
+planConditionCount = 1
+planConditionClassProvided = true
+planCondition2 = "NotPathBuildingExists"
+planConditionPath2 = "0GTow12"
+MinTtlScrap = 6
+buildType1 = "sbtowe"
+buildCount1 = 1
+buildLoc1 = "0GTow12"
+maxTries = 1
+pathpointsCanBeMissing = true
+//ContinueEvenIfFail = true
+
+[Plan104]
+planType = "BaseBuildMinimums"
+planPriority = 874
+planCondition = "Exists"
+planConditionClass = "svcnst"
+planConditionCount = 1
+planConditionClassProvided = true
+planCondition2 = "NotPathBuildingExists"
+planConditionPath2 = "0SPow2"
+MinTtlScrap = 6
+buildType1 = "sbspow"
+buildCount1 = 1
+buildLoc1 = "0SPow2"
+maxTries = 1
+pathpointsCanBeMissing = true
+//ContinueEvenIfFail = true
+
+[Plan105]
+planType = "BaseBuildMinimums"
+planPriority = 873
+planCondition = "Exists"
+planConditionClass = "svcnst"
+planConditionCount = 1
+planConditionClassProvided = true
+planCondition2 = "NotPathBuildingExists"
+planConditionPath2 = "0GTow21"
+MinTtlScrap = 6
+buildType1 = "sbtowe"
+buildCount1 = 1
+buildLoc1 = "0GTow21"
+maxTries = 1
+pathpointsCanBeMissing = true
+//ContinueEvenIfFail = true
+
+[Plan106]
+planType = "BaseBuildMinimums"
+planPriority = 872
+planCondition = "Exists"
+planConditionClass = "svcnst"
+planConditionCount = 1
+planConditionClassProvided = true
+planCondition2 = "NotPathBuildingExists"
+planConditionPath2 = "0GTow22"
+MinTtlScrap = 6
+buildType1 = "sbtowe"
+buildCount1 = 1
+buildLoc1 = "0GTow22"
+maxTries = 1
+pathpointsCanBeMissing = true
+//ContinueEvenIfFail = true
+
+[Plan107]
+planType = "BaseBuildMinimums"
+planPriority = 869
+planCondition = "Exists"
+planConditionClass = "svcnst"
+planConditionCount = 1
+planConditionClassProvided = true
+planCondition2 = "NotPathBuildingExists"
+planConditionPath2 = "0SPow3"
+MinTtlScrap = 6
+buildType1 = "sbspow"
+buildCount1 = 1
+buildLoc1 = "0SPow3"
+maxTries = 1
+pathpointsCanBeMissing = true
+//ContinueEvenIfFail = true
+
+[Plan108]
+planType = "BaseBuildMinimums"
+planPriority = 868
+planCondition = "Exists"
+planConditionClass = "svcnst"
+planConditionCount = 1
+planConditionClassProvided = true
+planCondition2 = "NotPathBuildingExists"
+planConditionPath2 = "0GTow31"
+MinTtlScrap = 6
+buildType1 = "sbtowe"
+buildCount1 = 1
+buildLoc1 = "0GTow31"
+maxTries = 1
+pathpointsCanBeMissing = true
+//ContinueEvenIfFail = true
+
+[Plan109]
+planType = "BaseBuildMinimums"
+planPriority = 867
+planCondition = "Exists"
+planConditionClass = "svcnst"
+planConditionCount = 1
+planConditionClassProvided = true
+planCondition2 = "NotPathBuildingExists"
+planConditionPath2 = "0GTow32"
+MinTtlScrap = 6
+buildType1 = "sbtowe"
+buildCount1 = 1
+buildLoc1 = "0GTow32"
+maxTries = 1
+pathpointsCanBeMissing = true
+//ContinueEvenIfFail = true
+
+
+
+[Plan110]
+planType = "BaseBuildMinimums"
+planPriority = 864
+planCondition = "Exists"
+planConditionClass = "svcnst"
+planConditionCount = 1
+planConditionClassProvided = true
+planCondition2 = "NotExists"
+planConditionClass2 = "hang"
+planConditionCount2 = 1
+planCompare2 = ">=" 
+planConditionClassProvided2 = true
+planCondition3 = "NotPathBuildingExists"
+planConditionPath3 = "0Hang1"
+MinTtlScrap = 7
+buildType1 = "sbhang"
+buildCount1 = 1
+buildLoc1 = "0Hang1"
+maxTries = 1
+pathpointsCanBeMissing = true
+//ContinueEvenIfFail = true
+
+[Plan111]
+planType = "BaseBuildMinimums"
+planPriority = 863
+planCondition = "Exists"
+planConditionClass = "svcnst"
+planConditionCount = 1
+planConditionClassProvided = true
+planCondition2 = "NotExists"
+planConditionClass2 = "supp"
+planConditionCount2 = 1
+planCompare2 = ">=" 
+planConditionClassProvided2 = true
+planCondition3 = "NotPathBuildingExists"
+planConditionPath3 = "0Supp1"
+MinTtlScrap = 5
+buildType1 = "sbsupp"
+buildCount1 = 1
+buildLoc1 = "0Supp1"
+maxTries = 1
+pathpointsCanBeMissing = true
+//ContinueEvenIfFail = true
+
+[Plan112]
+planType = "BaseBuildMinimums"
+planPriority = 862
+planCondition = "Exists"
+planConditionClass = "svcnst"
+planConditionCount = 1
+planConditionClassProvided = true
+planCondition2 = "NotExists"
+planConditionClass2 = "siloa"
+planConditionCount2 = 1
+planCompare2 = ">=" 
+planConditionClassProvided2 = true
+planCondition3 = "NotPathBuildingExists"
+planConditionPath3 = "0Silo1"
+MinTtlScrap = 5
+buildType1 = "sbsilo"
+buildLoc1 = "0Silo1"
+maxTries = 1
+pathpointsCanBeMissing = true
+//ContinueEvenIfFail = true
+
+[Plan113]
+planType = "BaseBuildMinimums"
+planPriority = 848
+planCondition = "Exists"
+planConditionClass = "svcnst"
+planConditionCount = 1
+planConditionClassProvided = true
+planCondition2 = "NotExists"
+planConditionClass2 = "cafe"
+planConditionCount2 = 1
+planCompare2 = ">=" 
+planConditionClassProvided2 = true
+planCondition3 = "NotPathBuildingExists"
+planConditionPath3 = "0Cafe1"
+MinTtlScrap = 6
+buildType1 = "sbcafe"
+buildCount1 = 1
+buildLoc1 = "0Cafe1"
+maxTries = 1
+pathpointsCanBeMissing = true
+//ContinueEvenIfFail = true
+
+[Plan114]
+planType = "BaseBuildMinimums"
+planPriority = 847
+planCondition = "Exists"
+planConditionClass = "svcnst"
+planConditionCount = 1
+planConditionClassProvided = true
+planCondition2 = "NotExists"
+planConditionClass2 = "barr"
+planConditionCount2 = 1
+planCompare2 = ">=" 
+planConditionClassProvided2 = true
+planCondition3 = "NotPathBuildingExists"
+planConditionPath3 = "0Barr1"
+MinTtlScrap = 8
+buildType1 = "sbbarr"
+buildCount1 = 3
+buildLoc1 = "0Barr1"
+maxTries = 1
+pathpointsCanBeMissing = true
+//ContinueEvenIfFail = true
+
+[Plan115]
+planType = "BaseBuildMinimums"
+planPriority = 844
+planCondition = "Exists"
+planConditionClass = "svcnst"
+planConditionCount = 1
+planConditionClassProvided = true
+planCondition2 = "NotExists"
+planConditionClass2 = "comm"
+planConditionCount2 = 1
+planCompare2 = ">=" 
+planConditionClassProvided2 = true
+planCondition3 = "NotPathBuildingExists"
+planConditionPath3 = "0Comm1"
+MinTtlScrap = 6
+buildType1 = "sbcomm"
+buildCount1 = 1
+buildLoc1 = "0Comm1"
+maxTries = 1
+pathpointsCanBeMissing = true
+//ContinueEvenIfFail = true
+
+[Plan116]
+planType = "BaseBuildMinimums"
+planPriority = 843
+planCondition = "Exists"
+planConditionClass = "svcnst"
+planConditionCount = 1
+planConditionClassProvided = true
+planCondition2 = "NotExists"
+planConditionClass2 = "hqcp"
+planConditionCount2 = 1
+planCompare2 = ">=" 
+planConditionClassProvided2 = true
+planCondition3 = "NotPathBuildingExists"
+planConditionPath3 = "0HQCP1"
+MinTtlScrap = 8
+buildType1 = "sbhqcp"
+buildCount1 = 1
+buildLoc1 = "0HQCP1"
+maxTries = 1
+pathpointsCanBeMissing = true
+//ContinueEvenIfFail = true
+
+[Plan117]
+planType = "BaseBuildMinimums"
+planPriority = 842
+planCondition = "Exists"
+planConditionClass = "svcnst"
+planConditionCount = 1
+planConditionClassProvided = true
+planCondition2 = "NotExists"
+planConditionClass2 = "mbld"
+planConditionCount2 = 1
+planCompare2 = ">=" 
+planConditionClassProvided2 = true
+planCondition3 = "NotPathBuildingExists"
+planConditionPath3 = "0MBld1"
+MinTtlScrap = 5
+buildType1 = "sbmbld"
+buildCount1 = 1
+buildLoc1 = "0MBld1"
+maxTries = 1
+pathpointsCanBeMissing = true
+//ContinueEvenIfFail = true
+
+[Plan118]
+planType = "BaseBuildMinimums"
+planPriority = 841
+planCondition = "Exists"
+planConditionClass = "svcnst"
+planConditionCount = 1
+planConditionClassProvided = true
+planCondition2 = "NotExists"
+planConditionClass2 = "siloa"
+planConditionCount2 = 2
+planCompare2 = ">=" 
+planConditionClassProvided2 = true
+planCondition3 = "NotPathBuildingExists"
+planConditionPath3 = "0Silo2"
+MinTtlScrap = 5
+buildType1 = "sbsilo"
+buildLoc1 = "0Silo2"
+maxTries = 1
+pathpointsCanBeMissing = true
+//ContinueEvenIfFail = true
+
+[Plan119]
+planType = "BaseBuildMinimums"
+planPriority = 840
+planCondition = "Exists"
+planConditionClass = "svcnst"
+planConditionCount = 1
+planConditionClassProvided = true
+planCondition2 = "NotExists"
+planConditionClass2 = "siloa"
+planConditionCount2 = 3
+planCompare2 = ">=" 
+planConditionClassProvided2 = true
+planCondition3 = "NotPathBuildingExists"
+planConditionPath3 = "0Silo3"
+MinTtlScrap = 5
+buildType1 = "sbsilo"
+buildLoc1 = "0Silo3"
+maxTries = 1
+pathpointsCanBeMissing = true
+//ContinueEvenIfFail = true
+
+[Plan120]
+planType = "BaseBuildMinimums"
+planPriority = 839
+planCondition = "Exists"
+planConditionClass = "svcnst"
+planConditionCount = 1
+planConditionClassProvided = true
+planCondition2 = "NotExists"
+planConditionClass2 = "barr"
+planConditionCount2 = 2
+planCompare2 = ">=" 
+planConditionClassProvided2 = true
+planCondition3 = "NotPathBuildingExists"
+planConditionPath3 = "0Barr2"
+MinTtlScrap = 8
+buildType1 = "sbbarr"
+buildCount1 = 3
+buildLoc1 = "0Barr2"
+maxTries = 1
+pathpointsCanBeMissing = true
+//ContinueEvenIfFail = true
+
+[Plan121]
+planType = "BaseBuildMinimums"
+planPriority = 838
+planCondition = "Exists"
+planConditionClass = "svcnst"
+planConditionCount = 1
+planConditionClassProvided = true
+planCondition2 = "NotExists"
+planConditionClass2 = "barr"
+planConditionCount2 = 3
+planCompare2 = ">=" 
+planConditionClassProvided2 = true
+planCondition3 = "NotPathBuildingExists"
+planConditionPath3 = "0Barr3"
+MinTtlScrap = 8
+buildType1 = "sbbarr"
+buildCount1 = 3
+buildLoc1 = "0Barr3"
+maxTries = 1
+pathpointsCanBeMissing = true
+//ContinueEvenIfFail = true
+
+// Lets inject some more scrap creators into the mix,...The Scrap Must Flow...
+[Plan122]
+planType = "BuildLoop" // Always try to put scavs out on the field.
+planPriority = 958
+planCondition = "Exists"
+planConditionClass = "sbrecy"
+planConditionCount = 1
+planConditionClassProvided = true
+planCompare = ">=" 
+planConditionOr = false
+
+planCondition2 = "NotExists"
+planConditionClass2 = "scav"
+planConditionCount2 = 6 // Not Enough scavs!??!?! Build MOAR!
+planConditionClassProvided2 = true
+planCompare2 = ">=" 
+
+MinTtlScrap = 4
+maxLoops = 9999 // Only try to do this 9999 times, how hard could it be??
+loopDelay = 120 // Wait atleast 2 minutes between this so the player can't make us stuck...
+buildType1 = "svscavREPLACE"
+buildCount1 = 3
