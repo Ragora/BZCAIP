@@ -3,13 +3,8 @@
 
 	Currently experimental AIP generator for BattleZone II Classic Mod.
 
-<<<<<<< HEAD
 	This software is licensed under the Draconic Free License
 	version 1. Please refer to LICENSE.txt for more information.
-=======
-	This software is licensed under the MIT license. Refer to LICENSE.txt
-    for more information.
->>>>>>> develop
 """
 
 import os
@@ -154,11 +149,7 @@ class Application:
 		""" Main program "entry point" of sorts. """
 
 		print("BZCAIP AIP Generator v1.0.0 Release")
-<<<<<<< HEAD
-		print("Copyright (c) 2013 Robert MacGregor")
-=======
 		print("Copyright (c) 2014 Robert MacGregor")
->>>>>>> develop
 
 		if (len(sys.argv) < 3): die("Usage: %s <RACE> <SOURCE FOLDER> [DESTINATION FOLDER]" % sys.argv[0])
 		self.race = sys.argv[1]
